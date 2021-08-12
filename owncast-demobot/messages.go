@@ -33,7 +33,11 @@ func GetFurtherResourcesMessage() string {
 }
 
 func GetBotHelpText() string {
-	return `Beep bop, I'm a bot. [Here](https://github.com/unclearParadigm/owncast-examples/) you can find my source code.`
+	return `Beep bop, I'm a bot. [Here](https://github.com/unclearParadigm/owncast-examples/) you can find my source code.
+Here are the commands that I understand:
+- !bot - the message you are reading right now
+- !links - send links to various Owncast resources
+`
 }
 
 func GetStreamStartedMessage() string {
