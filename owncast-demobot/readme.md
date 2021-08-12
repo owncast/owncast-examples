@@ -15,19 +15,19 @@ This is a simple bot supposed to help people visiting the [Owncast Demo Instance
 
 ## Webhook Endpoints
 
-- "/auto"
+- `/auto`
     accepts every webhook, does automatically differentiate between the available event types
 
-- "/stream/stop"
+- `/stream/stop`
     accepts STREAM_START events
 
-- "/stream/start"
+- `/stream/start`
     accepts STREAM_STOP events
 
-- "/user/join"
+- `/user/join`
     accepts USER_JOIN events (and NAME_CHANGED events)
 
-- "/user/message"
+- `/user/message`
     accepts CHAT events (any kind of chat message a user types)
 
 For Details on the individual Webhooks, please refer to the [Owncast Thirdparty API documentation](https://owncast.online/thirdparty/webhooks/)
