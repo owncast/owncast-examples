@@ -53,4 +53,4 @@ Environment variables WILL override values in the `config.yaml`. Environment var
 1. `git clone https://github.com/owncast/owncast-examples`
 1. `cd owncast-examples/owncast-demobot`
 1. `docker build -t owncastdemobot .`
-1. `docker run --name owncastdemobot --network host -e OWNCAST_DEMOBOT_LISTENADDRESS=":8100" -e OWNCAST_DEMOBOT_ACCESSTOKEN="<our AccessToken> -e OWNCAST_DEMOBOT_OWNCASTADDRESS="http://localhost:8080"`
+1. `docker run --name owncastdemobot --network host -e OWNCAST_DEMOBOT_LISTENADDRESS=":8100" -e OWNCAST_DEMOBOT_ACCESSTOKEN="<our AccessToken> -e OWNCAST_DEMOBOT_OWNCASTADDRESS="http://localhost:8080" owncastdemobot`
