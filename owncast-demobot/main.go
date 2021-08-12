@@ -16,7 +16,9 @@ func main() {
 	httpMultiplexer.HandleFunc("/user/join", RequireHttpPost(RequireJsonContentType(LogRequest(UserJoin))))
 	httpMultiplexer.HandleFunc("/user/message", RequireHttpPost(RequireJsonContentType(LogRequest(UserMessage))))
 
-	log.Print("Listening on " + DemoBotConfiguration.ListenAddress)
+	log.Print("Bot is working for " + DemoBotConfiguration.OwncastAddress)
+	log.Print("Listening for Webhooks on " + DemoBotConfiguration.ListenAddress)
+
 	err := http.ListenAndServe(DemoBotConfiguration.ListenAddress, httpMultiplexer)
 	if err != nil {
 		log.Fatal(err)
