@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
+	"strings"
 )
 
 func AutoRoute(w http.ResponseWriter, r *http.Request) {
@@ -60,13 +60,13 @@ func UserJoin(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 
-	/* sleeps to make the repsonses more "human-like", just don't overdo it, otherwise the webhook will timeout */
-	time.Sleep(2 * time.Second)
-	SendSystemMessage(GetUserJoinMessage(event.EventData.User.DisplayName))
-	time.Sleep(2 * time.Second)
-	SendSystemMessage("May I introduce myself? I am a friendly Owncast Bot, programmed to help you around here!")
-	time.Sleep(1 * time.Second)
-	SendSystemMessage("Owncast has assigned you " + event.EventData.User.DisplayName + " as Username. If you don't like it, or would like to change it you can do so in the upper right corner")
+	go SendSystemMessage(GetUserJoinMessage(event.EventData.User.DisplayName), 1)
+	if IsNewUser(event.EventData.User.Id) {
+		go SendSystemMessage(GetBotIntroductionMessage(), 3)
+		go SendSystemMessage(GetNameChangeHint(event.EventData.User.DisplayName), 5)
+	}
+
+	AddKnownUser(event.EventData.User.Id)
 }
 
 func UserNameChange(w http.ResponseWriter, r *http.Request) {
@@ -78,8 +78,9 @@ func UserNameChange(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 
-	time.Sleep(2 * time.Second)
-	SendSystemMessage(GetNamechangeMessage(event.EventData.User.DisplayName))
+	if len(event.EventData.User.PreviousNames) == 1 {
+		go SendSystemMessage(GetNamechangeMessage(event.EventData.User.DisplayName), 1)
+	}
 }
 
 func UserMessage(w http.ResponseWriter, r *http.Request) {
@@ -112,8 +113,8 @@ func StreamStartStop(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if event.Type == StreamStarted {
-		SendSystemMessage(GetStreamStartedMessage())
+		go SendSystemMessage(GetStreamStartedMessage(), 5)
 	} else {
-		SendSystemMessage(GetStreamStoppedMessage())
+		go SendSystemMessage(GetStreamStoppedMessage(), 5)
 	}
 }
