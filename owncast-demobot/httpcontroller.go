@@ -91,17 +91,17 @@ func UserMessage(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 
-	SendSystemMessage(`# Thank you for joining us here.
-    I'm just a chat bot
+	switch event.EventData.Body { /* bot commands*/
+	case "!bot":
+		go SendSystemMessage(GetBotHelpText(), 0)
+	case "!links":
+		go SendSystemMessage(GetFurtherResourcesMessage(), 0)
+	}
 
-    You can find ...
-
-    <ul>
-    <li>our source code on [Github](https://github.com/owncast/owncast)</li>
-    <li>our docs and our website on [Owncast](https://owncast.online)</li>
-    <li>us on [Rocket.Chat](https://owncast.rocket.chat/) - hang out with us</li>
-    </ul>
-    `)
+	if strings.Contains(event.EventData.Body, "?") || strings.Contains(event.EventData.Body, "is ") { // User-Question
+		go SendSystemMessage("Good question. I just can't answer it properly yet. I'm a bot, remember? Here's the best I came up with:", 1)
+		go SendSystemMessage(GetFurtherResourcesMessage(), 2)
+	}
 }
 
 func StreamStartStop(w http.ResponseWriter, r *http.Request) {
