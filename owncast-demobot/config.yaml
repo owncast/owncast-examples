@@ -1,0 +1,3 @@
+ListenAddress: ":8100"
+AccessToken: "<your AccessToken>"
+OwncastAddress: "http://localhost:8080"
