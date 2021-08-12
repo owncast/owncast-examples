@@ -2,6 +2,15 @@
 
 This is a simple bot supposed to help people visiting the [Owncast Demo Instance](https://demo.owncast.online). It's also here, to show how easy it is to build on top of Owncast. This bot is written in [Go](https://golang.org/).
 
+## Features
+
+- receive Webhooks from Owncast with catch-all webhook endpoint
+- send random chat messages on Stream Start / Stream Stop
+- greet newly joined users
+- give new users hints to change their name
+- rudimentary question detection, causing the bot to reply with a handful of Owncast links
+- support for !bang commands / custom commands
+
 ## Configuration
 
 This bot can be configured via the `config.yaml` configuration file and/or Environment variables. Environment variables take higher precedence and will override any values configured in the configuration.
