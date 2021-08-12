@@ -10,6 +10,7 @@ This is a simple bot supposed to help people visiting the [Owncast Demo Instance
 - give new users hints to change their name
 - rudimentary question detection, causing the bot to reply with a handful of Owncast links
 - support for !bang commands / custom commands
+- running as container
 
 ## Configuration
 
