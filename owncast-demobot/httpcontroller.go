@@ -57,7 +57,6 @@ func UserJoin(w http.ResponseWriter, r *http.Request) {
 func UserNameChange(w http.ResponseWriter, r *http.Request) {
 	var event NameChangeWebhookEvent
 	body, err := ioutil.ReadAll(r.Body)
-	r.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 	err = json.Unmarshal(body, &event)
 	if err != nil {
 		log.Print(err)
