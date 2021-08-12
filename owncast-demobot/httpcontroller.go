@@ -25,27 +25,12 @@ func AutoRoute(w http.ResponseWriter, r *http.Request) {
 	case StreamStarted, StreamStopped:
 		StreamStartStop(w, r)
 		return
-	case UserNameChanged:
-		var nameChangeEvent NameChangeWebhookEvent
-		nameChangeEvent.EventData.Type = UserNameChanged
-		body, err := ioutil.ReadAll(r.Body)
-		r.Body = ioutil.NopCloser(bytes.NewBuffer(body))
-		err = json.Unmarshal(body, &nameChangeEvent)
-		if err != nil {
-			log.Print(err)
-		}
-
-		switch nameChangeEvent.EventData.Type {
-		// see https://github.com/owncast/owncast/issues/1302
-		case "":
-			UserJoin(w, r)
-			return
-		case UserNameChanged:
-			UserNameChange(w, r)
-			return
-		}
+	case UserJoined:
+		UserJoin(w, r)
 		return
-
+	case UserNameChanged:
+		UserNameChange(w, r)
+		return
 	default:
 		log.Printf("Warning Unknown EventType")
 		return
