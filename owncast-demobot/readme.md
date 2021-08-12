@@ -12,6 +12,26 @@ This is a simple bot supposed to help people visiting the [Owncast Demo Instance
 - support for !bang commands / custom commands
 - running as container
 
+
+## Webhook Endpoints
+
+- "/auto"
+    accepts every webhook, does automatically differentiate between the available event types
+
+- "/stream/stop"
+    accepts STREAM_START events
+
+- "/stream/start"
+    accepts STREAM_STOP events
+
+- "/user/join"
+    accepts USER_JOIN events (and NAME_CHANGED events)
+
+- "/user/message"
+    accepts CHAT events (any kind of chat message a user types)
+
+For Details on the individual Webhooks, please refer to the [Owncast Thirdparty API documentation](https://owncast.online/thirdparty/webhooks/)
+
 ## Configuration
 
 This bot can be configured via the `config.yaml` configuration file and/or Environment variables. Environment variables take higher precedence and will override any values configured in the configuration.
