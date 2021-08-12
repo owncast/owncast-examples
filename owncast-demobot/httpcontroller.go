@@ -111,12 +111,9 @@ func StreamStartStop(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 
-	var msg string
 	if event.Type == StreamStarted {
-		msg = GetStreamStartedMessage()
+		SendSystemMessage(GetStreamStartedMessage())
 	} else {
-		msg = GetStreamStoppedMessage()
+		SendSystemMessage(GetStreamStoppedMessage())
 	}
-
-	SendSystemMessage(msg)
 }
