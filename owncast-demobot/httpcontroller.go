@@ -83,7 +83,7 @@ func UserMessage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if strings.Contains(event.EventData.Body, "?") || strings.Contains(event.EventData.Body, "is ") { // User-Question
-		go SendSystemMessage("Good question. I just can't answer it properly yet. I'm a bot, remember? Here's the best I came up with:", 1)
+		go SendSystemMessage("Good question, but I can't answer it properly yet. I'm just a bot, remember? Here's the best I came up with:", 1)
 		go SendSystemMessage(GetFurtherResourcesMessage(), 2)
 	}
 }
