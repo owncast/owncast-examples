@@ -16,7 +16,7 @@ func GetNamechangeMessage(newUsername string) string {
 }
 
 func GetBotIntroductionMessage() string {
-	return "May I introduce myself? I am a friendly Owncast Bot, programmed to help you around here! I'm not very smart yet."
+	return "May I introduce myself? I am a friendly Owncast Bot, programmed to help you on this demo server! But I'm not very smart yet."
 }
 
 func GetNameChangeHint(username string) string {
@@ -25,15 +25,15 @@ func GetNameChangeHint(username string) string {
 
 func GetFurtherResourcesMessage() string {
 	return `# Here are some links for you:
-- find us on our **[Website](https://owncast.online/)**
-- join and chat with us on **[RocketChat](https://owncast.rocket.chat)**
-- read our source code on **[Github](https://github.com/owncast)**
-- check out our **[documentation](https://owncast.online/docs/)**
-- see **[how you can get your personal Owncast up and running](https://owncast.online/quickstart/)**`
+- Find us on our **[Website](https://owncast.online/)**
+- See how easy it is **[to get your personal Owncast up and running](https://owncast.online/quickstart/)**
+- Chat with us on **[RocketChat](https://owncast.rocket.chat)**
+- Collaborate, contribute or file feature requests and bug reports on **[Github](https://github.com/owncast)**
+- Read the **[documentation](https://owncast.online/docs/)** to learn how you can configure Owncast.`
 }
 
 func GetBotHelpText() string {
-	return `Beep bop, I'm a bot. [Here](https://github.com/unclearParadigm/owncast-examples/) you can find my source code.
+	return `Beep bop, I'm a bot built just for this demo server. [Here](https://github.com/unclearParadigm/owncast-examples/) you can find my source code.
 Here are the commands that I understand:
 - !bot - the message you are reading right now
 - !links - send links to various Owncast resources
