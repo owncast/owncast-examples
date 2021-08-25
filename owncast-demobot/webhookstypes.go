@@ -28,6 +28,7 @@ type User struct {
 type ChatMessage struct {
 	User      User      `json:"user,omitempty"`
 	Body      string    `json:"body,omitempty"`
+	ClientId  uint      `json:"clientId"`
 	RawBody   string    `json:"rawBody,omitempty"`
 	ID        string    `json:"id,omitempty"`
 	Visible   bool      `json:"visible"`
@@ -59,6 +60,7 @@ type NameChangeEvent struct {
 	Id        string    `json:"id"`
 	Timestamp time.Time `json:"timestamp"`
 	User      User      `json:"user"`
+	ClientId  uint      `json:"clientId"`
 }
 
 type NameChangeWebhookEvent struct {
