@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -9,11 +11,11 @@ func RequireHttpPost(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" {
 			http.Error(w, "Unsupported Method", http.StatusMethodNotAllowed)
-			return;
+			return
 		}
 
 		next.ServeHTTP(w, r)
-	   }
+	}
 }
 
 func RequireJsonContentType(next http.HandlerFunc) http.HandlerFunc {
@@ -29,6 +31,9 @@ func RequireJsonContentType(next http.HandlerFunc) http.HandlerFunc {
 func LogRequest(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Tracing request for '%s' from '%s'", r.RequestURI, r.RemoteAddr)
+		body, _ := ioutil.ReadAll(r.Body)
+		log.Printf("Body %s", string(body))
+		r.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 		next.ServeHTTP(w, r)
-	   }
+	}
 }
