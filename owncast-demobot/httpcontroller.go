@@ -45,10 +45,10 @@ func UserJoin(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 
-	go SendSystemMessage(GetUserJoinMessage(event.EventData.User.DisplayName), 1)
+	go SendSystemMessageToClient(event.EventData.ClientId, GetUserJoinMessage(event.EventData.User.DisplayName), 1)
 	if IsNewUser(event.EventData.User.Id) {
-		go SendSystemMessage(GetBotIntroductionMessage(), 3)
-		go SendSystemMessage(GetNameChangeHint(event.EventData.User.DisplayName), 5)
+		go SendSystemMessageToClient(event.EventData.ClientId, GetBotIntroductionMessage(), 3)
+		go SendSystemMessageToClient(event.EventData.ClientId, GetNameChangeHint(event.EventData.User.DisplayName), 5)
 	}
 
 	AddKnownUser(event.EventData.User.Id)
@@ -63,7 +63,7 @@ func UserNameChange(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(event.EventData.User.PreviousNames) == 1 {
-		go SendSystemMessage(GetNamechangeMessage(event.EventData.User.DisplayName), 1)
+		go SendSystemMessageToClient(event.EventData.ClientId, GetNamechangeMessage(event.EventData.User.DisplayName), 1)
 	}
 }
 
@@ -77,14 +77,14 @@ func UserMessage(w http.ResponseWriter, r *http.Request) {
 
 	switch event.EventData.Body { /* bot commands*/
 	case "!bot":
-		go SendSystemMessage(GetBotHelpText(), 0)
+		go SendSystemMessageToClient(event.EventData.ClientId, GetBotHelpText(), 0)
 	case "!links":
-		go SendSystemMessage(GetFurtherResourcesMessage(), 0)
+		go SendSystemMessageToClient(event.EventData.ClientId, GetFurtherResourcesMessage(), 0)
 	}
 
 	if strings.Contains(event.EventData.Body, "?") || strings.Contains(event.EventData.Body, "is ") { // User-Question
-		go SendSystemMessage("Good question, but I can't answer it properly yet. I'm just a bot, remember? Here's the best I came up with:", 1)
-		go SendSystemMessage(GetFurtherResourcesMessage(), 2)
+		go SendSystemMessageToClient(event.EventData.ClientId, "Good question, but I can't answer it properly yet. I'm just a bot, remember? Here's the best I came up with:", 1)
+		go SendSystemMessageToClient(event.EventData.ClientId, GetFurtherResourcesMessage(), 2)
 	}
 }
 
