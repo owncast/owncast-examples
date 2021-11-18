@@ -29,7 +29,8 @@ func GetFurtherResourcesMessage() string {
 - See how easy it is **[to get your personal Owncast up and running](https://owncast.online/quickstart/)**.
 - Chat with us on **[RocketChat](https://owncast.rocket.chat)**.
 - Collaborate, contribute or file feature requests and bug reports on **[Github](https://github.com/owncast)**.
-- Read the **[documentation](https://owncast.online/docs/)** to learn how you can configure Owncast.`
+- Read the **[documentation](https://owncast.online/docs/)** to learn how you can configure Owncast.
+- Visit the **[Owncast Directory](https://directory.owncast.online)** and see what others are streaming and how they're using the software.`
 }
 
 func GetBotHelpText() string {
