@@ -82,9 +82,22 @@ func UserMessage(w http.ResponseWriter, r *http.Request) {
 		go SendSystemMessageToClient(event.EventData.ClientId, GetFurtherResourcesMessage(), 0)
 	}
 
-	if strings.Contains(event.EventData.Body, "?") || strings.Contains(event.EventData.Body, "is ") { // User-Question
-		go SendSystemMessageToClient(event.EventData.ClientId, "Good question, but I can't answer it properly yet. I'm just a bot, remember? Here's the best I came up with:", 1)
-		go SendSystemMessageToClient(event.EventData.ClientId, GetFurtherResourcesMessage(), 2)
+	// Handle questions from chat users.
+	questionStrings := []string{
+		"?",
+		"what is",
+		"how do i",
+		"can i",
+	}
+
+	for _, questionString := range questionStrings {
+		compareString := strings.ToLower(questionString)
+		if strings.Contains(strings.ToLower(event.EventData.Body), compareString) {
+			go SendSystemMessageToClient(event.EventData.ClientId, "Good question. I'm just a bot, but here's the best I came up with:", 1)
+			go SendSystemMessageToClient(event.EventData.ClientId, GetFurtherResourcesMessage(), 2)
+
+			break
+		}
 	}
 }
 
