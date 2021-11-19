@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	InitializeBotMemory()
 	DemoBotConfiguration = CollectDemoBotConfiguration("config.yaml")
 
 	httpMultiplexer := http.NewServeMux()

@@ -1,31 +1,20 @@
 package main
 
 import (
-	"container/list"
+	"time"
+
+	"github.com/muesli/cache2go"
 )
 
-var knownUserIds *list.List
-
-func InitializeBotMemory() {
-	knownUserIds = list.New()
-	knownUserIds.Init()
-}
+var knownUserIds = cache2go.Cache("visitors")
 
 func AddKnownUser(userId string) {
-	if knownUserIds.Len() > 30 {
-		knownUserIds.Init()
-	}
-
 	if IsNewUser(userId) {
-		knownUserIds.PushBack(userId)
+		knownUserIds.Add(userId, time.Hour*24*15, userId)
 	}
 }
 
 func IsNewUser(userId string) bool {
-	for e := knownUserIds.Front(); e != nil; e = e.Next() {
-		if e.Value == userId {
-			return false
-		}
-	}
-	return true
+	exists, _ := knownUserIds.Value(userId)
+	return exists == nil
 }
